@@ -1,21 +1,21 @@
 {
     "name": "artifacia/artifacia-client-php",
-    "description": "A php client to integrate visual recommendation feature from Artifacia API.",
+    "description": "A php client to integrate Visual Recommendation feature from Artifacia API.",
     "type": "library",
-    "homepage": "https://github.com/artifacia/artifacia-client-php",
     "license": "MIT",
     "authors": [
         {
-            "name": "Ashish Kumar",
+            "name": "Ashish",
             "email": "erashish122@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3"
     },
-    "autoload": {
+    "autoload":{
         "psr-0": {
-            "artifacia": "src/"
-         }
+            "Artifacia":"src/"
+        }
     }
 }
