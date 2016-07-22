@@ -3,6 +3,8 @@
 /**
  *
  */
+namespace artifacia;
+
 class Client
 {
 
