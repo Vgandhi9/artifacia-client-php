@@ -22,9 +22,10 @@ The API is really easy and simple to use. First you need to create an account [h
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
-$user_name = <your_username>
-$password = <your_password>
-$client = new \Artifacia\Client($user_name, $password);
+$user_name = <your_username>;
+$password = <your_password>;
+use Artifacia\Client;
+$client = new Client($user_name, $password);
 ```
 
 ### Creating your index
