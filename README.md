@@ -33,8 +33,8 @@ The first step is to create a index of the items that you would like to store in
 
 ```php
 $data = file_get_contents("./sample_data.json");
-$data_indexing_response = client->upload_item_data($data)
-echo $data_indexing_response
+$data_indexing_response = client->upload_item_data($data);
+echo $data_indexing_response;
 ```
 
 ### Performing Visual Recommendation
@@ -42,7 +42,7 @@ Once you receive a notification form us about the status of the indexed data, yo
 You can search for a product ID indexed in the sample data you inserted/uploaded.
 
 ```php
-$sample_prod_id = 2761
-$query_response = client->get_visual_recommendations($sample_prod_id)
-echo $query_response
+$sample_prod_id = 2761;
+$query_response = client->get_visual_recommendations($sample_prod_id);
+echo $query_response;
 ```
