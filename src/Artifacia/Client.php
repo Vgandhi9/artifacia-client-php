@@ -3,16 +3,18 @@
 /**
  *
  */
-namespace artifacia;
+
+namespace Artifacia;
 
 class Client
 {
-
+  public $user;
+  public $passwd;
   function __construct($username, $password)
   {
-    $user = $username;
-    $passwd = $password;
-    $credentials = sprintf('Authorization: Basic %s', base64_encode("$username:$password") );
+    $this->user = $username;
+    $this->passwd = $password;
+    // $credentials = sprintf('Authorization: Basic %s', base64_encode("$user:$passwd") );
   }
 
   public function upload_user_data($data)
@@ -23,7 +25,7 @@ class Client
             'header'  =>
                           $credentials. "\r\n" .
                           'Content-Type: application/json',
-            'method' => 'POST'
+            'method' => 'POST',
             'content' => $data
         )
     ));
@@ -31,7 +33,7 @@ class Client
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
 
-    return $result
+    return $result;
   }
 
   public function upload_item_data($data)
@@ -42,7 +44,7 @@ class Client
             'header'  =>
                           $credentials. "\r\n" .
                           'Content-Type: application/json',
-            'method' => 'POST'
+            'method' => 'POST',
             'content' => $data
         )
     ));
@@ -50,7 +52,7 @@ class Client
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
 
-    return $result
+    return $result;
   }
 
   public function delete_item_data($data)
@@ -61,7 +63,7 @@ class Client
             'header'  =>
                           $credentials. "\r\n" .
                           'Content-Type: application/json',
-            'method' => 'DELETE'
+            'method' => 'DELETE',
             'content' => $data
         )
     ));
@@ -69,10 +71,10 @@ class Client
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
 
-    return $result
+    return $result;
   }
 
-  publin function get_visual_recommendation(prod_id)
+  public function get_cpr_recommendation($prod_id)
   {
     $url = 'http://api.artifacia.com/v1/recommendation/similar/%d';
     $context = stream_context_create(array(
@@ -88,10 +90,12 @@ class Client
 
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
+    return $result;
   }
 
-  publin function get_visual_recommendation(prod_id)
+  public function get_visual_recommendation($prod_id)
   {
+    $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
     $url = 'http://api.artifacia.com/v1/recommendation/collections/%d';
     $context = stream_context_create(array(
         'http' => array(
@@ -102,13 +106,14 @@ class Client
         )
     ));
 
-    $url = sprintf($url, prod_id);
+    $url = sprintf($url, $prod_id);
 
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
+    return $result;
   }
 
-  publin function get_smart_recommendation(user_id)
+  public function get_smart_recommendation($user_id)
   {
     $url = 'http://api.artifacia.com/v1/recommendation/user/%d';
     $context = stream_context_create(array(
@@ -124,5 +129,6 @@ class Client
 
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
+    return $result;
   }
 }
