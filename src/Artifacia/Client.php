@@ -18,10 +18,10 @@ class Client
     // $credentials = sprintf('Authorization: Basic %s', base64_encode("$user:$passwd") );
   }
 
-  public function upload_user_data($data)
+  public function upload_user_purchased_items($user_id, $data)
   {
     $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
-    $url = 'http://api.artifacia.com/v1/users';
+    $url = 'http://api.artifacia.com/v1/users/%d/purchased_items';
     $context = stream_context_create(array(
         'http' => array(
             'header'  =>
@@ -31,6 +31,28 @@ class Client
             'content' => $data
         )
     ));
+    $url = sprintf($url, $user_id);
+
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) { /* Handle error */ }
+
+    return $result;
+  }
+
+  public function upload_user_viewed_items($user_id, $data)
+  {
+    $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
+    $url = 'http://api.artifacia.com/v1/users/%d/viewed_items';
+    $context = stream_context_create(array(
+        'http' => array(
+            'header'  =>
+                          $credentials. "\r\n" .
+                          'Content-Type: application/json',
+            'method' => 'POST',
+            'content' => $data
+        )
+    ));
+    $url = sprintf($url, $user_id);
 
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
