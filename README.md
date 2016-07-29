@@ -18,7 +18,7 @@ composer require artifacia/artifacia-client-php
 
 ## Getting Started
 
-The API is really easy and simple to use. First you need to visit [this](http://www.artifacia.com/contact/) page and request for username and password. Using that credentials you can create your constructor and get stated. 
+The API is really easy and simple to use. First you need to visit [this](http://www.artifacia.com/requestaccess/) page and request for username and password. Using that credentials you can create your constructor and get stated. 
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
