@@ -6,7 +6,7 @@ The wrapper allows you to create your own index of images on which you would lik
 
 * Visual Recommendation
 * Cross Product Recommendation
-* Smart Recommendation
+* Personalized Recommendation
 
 ## Installation
 
@@ -18,7 +18,7 @@ composer require artifacia/artifacia-client-php
 
 ## Getting Started
 
-The API is really easy and simple to use. First you need to visit [this](http://www.artifacia.com/requestaccess/) page and request for username and password. Using that credentials you can create your constructor and get stated. 
+The API is really easy and simple to use. First you need to visit [this](http://www.artifacia.com/requestaccess/) page and request for username and password. Using that credentials you can create your constructor and get stated.
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
@@ -39,10 +39,11 @@ echo $data_indexing_response;
 
 ### Performing Visual Recommendation
 Once you receive a notification from us about the status of the indexed data, you are ready to search.
-You can search for a product ID indexed in the sample data you inserted/uploaded.
+You can search for a product ID indexed in the sample data you inserted/uploaded. And also you can specify the number of results to be returned.
 
 ```php
 $sample_prod_id = 2761;
-$query_response = $client->get_visual_recommendation($sample_prod_id);
+$num = 4;
+$query_response = $client->get_visual_recommendation($sample_prod_id, $num);
 echo $query_response;
 ```
