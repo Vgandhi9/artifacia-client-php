@@ -21,7 +21,7 @@ class Client
   public function upload_user_purchased_items($user_id, $data)
   {
     $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
-    $url = 'http://api.artifacia.com/v1/users/%d/purchased_items';
+    $url = 'https://api.artifacia.com/v1/users/%d/purchased_items';
     $context = stream_context_create(array(
         'http' => array(
             'header'  =>
@@ -42,7 +42,7 @@ class Client
   public function upload_user_viewed_items($user_id, $data)
   {
     $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
-    $url = 'http://api.artifacia.com/v1/users/%d/viewed_items';
+    $url = 'https://api.artifacia.com/v1/users/%d/viewed_items';
     $context = stream_context_create(array(
         'http' => array(
             'header'  =>
@@ -63,7 +63,7 @@ class Client
   public function upload_item_data($data)
   {
     $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
-    $url = 'http://api.artifacia.com/v1/items';
+    $url = 'https://api.artifacia.com/v1/items';
     $context = stream_context_create(array(
         'http' => array(
             'header'  =>
@@ -83,7 +83,7 @@ class Client
   public function delete_item_data($data)
   {
     $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
-    $url = 'http://api.artifacia.com/v1/items';
+    $url = 'https://api.artifacia.com/v1/items';
     $context = stream_context_create(array(
         'http' => array(
             'header'  =>
@@ -103,7 +103,7 @@ class Client
   public function get_cpr_recommendation($prod_id)
   {
     $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
-    $url = 'http://api.artifacia.com/v1/recommendation/collections/%d';
+    $url = 'https://api.artifacia.com/v1/recommendation/collections/%d';
     $context = stream_context_create(array(
         'http' => array(
             'header'  =>
@@ -123,7 +123,7 @@ class Client
   public function get_visual_recommendation($prod_id)
   {
     $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
-    $url = 'http://api.artifacia.com/v1/recommendation/similar/%d';
+    $url = 'https://api.artifacia.com/v1/recommendation/similar/%d';
     $context = stream_context_create(array(
         'http' => array(
             'header'  =>
@@ -143,7 +143,7 @@ class Client
   public function get_smart_recommendation($user_id)
   {
     $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
-    $url = 'http://api.artifacia.com/v1/recommendation/user/%d';
+    $url = 'https://api.artifacia.com/v1/recommendation/user/%d';
     $context = stream_context_create(array(
         'http' => array(
             'header'  =>
