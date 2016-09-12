@@ -22,10 +22,9 @@ The API is really easy and simple to use. First you need to visit [this](http://
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
-$user_name = <your_username>;
-$password = <your_password>;
+$ai_key = <api_key>;
 use Artifacia\Client;
-$client = new Client($user_name, $password);
+$client = new Client($api_key);
 ```
 
 ### Creating your index
@@ -39,11 +38,12 @@ echo $data_indexing_response;
 
 ### Performing Visual Recommendation
 Once you receive a notification from us about the status of the indexed data, you are ready to search.
-You can search for a product ID indexed in the sample data you inserted/uploaded. And also you can specify the number of results to be returned.
+You can search for a product ID indexed in the sample data you inserted/uploaded. And also you can specify the number of results to be returned as well as set the attribute (like color, pattern, material etc.) if you want to prioritize the result as given below.
 
 ```php
 $sample_prod_id = 2761;
 $num = 4;
-$query_response = $client->get_visual_recommendation($sample_prod_id, $num);
+$filters = array('color' => 1, 'pattern' => 1);
+$query_response = $client->get_visual_recommendation($sample_prod_id, $num, $filters);
 echo $query_response;
 ```

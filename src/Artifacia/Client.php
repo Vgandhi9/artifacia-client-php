@@ -8,25 +8,20 @@ namespace Artifacia;
 
 class Client
 {
-  protected $user;
-  protected $passwd;
+  protected $api_key;
 
-  public function __construct($username, $password)
+  public function __construct($api_key)
   {
-    $this->user = $username;
-    $this->passwd = $password;
-    // $credentials = sprintf('Authorization: Basic %s', base64_encode("$user:$passwd") );
+    $this->api_key = $api_key;
   }
 
   public function upload_user_purchased_items($user_id, $data)
   {
-    $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
     $url = 'https://api.artifacia.com/v1/users/%d/purchased_items';
     $context = stream_context_create(array(
         'http' => array(
-            'header'  =>
-                          $credentials. "\r\n" .
-                          'Content-Type: application/json',
+          'header'  =>["api_key: " . $api_key,
+          "Content-Type: application/json"],
             'method' => 'POST',
             'content' => $data
         )
@@ -41,13 +36,11 @@ class Client
 
   public function upload_user_viewed_items($user_id, $data)
   {
-    $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
     $url = 'https://api.artifacia.com/v1/users/%d/viewed_items';
     $context = stream_context_create(array(
         'http' => array(
-            'header'  =>
-                          $credentials. "\r\n" .
-                          'Content-Type: application/json',
+            'header'  =>["api_key: " . $api_key,
+            "Content-Type: application/json"],
             'method' => 'POST',
             'content' => $data
         )
@@ -62,13 +55,11 @@ class Client
 
   public function upload_item_data($data)
   {
-    $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
     $url = 'https://api.artifacia.com/v1/items';
     $context = stream_context_create(array(
         'http' => array(
-            'header'  =>
-                          $credentials. "\r\n" .
-                          'Content-Type: application/json',
+          'header'  =>["api_key: " . $api_key,
+          "Content-Type: application/json"],
             'method' => 'POST',
             'content' => $data
         )
@@ -82,13 +73,11 @@ class Client
 
   public function delete_item_data($data)
   {
-    $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
     $url = 'https://api.artifacia.com/v1/items';
     $context = stream_context_create(array(
         'http' => array(
-            'header'  =>
-                          $credentials. "\r\n" .
-                          'Content-Type: application/json',
+          'header'  =>["api_key: " . $api_key,
+          "Content-Type: application/json"],
             'method' => 'DELETE',
             'content' => $data
         )
@@ -100,60 +89,56 @@ class Client
     return $result;
   }
 
-  public function get_cpr_recommendation($prod_id)
+  public function get_cpr_recommendation($prod_id, $num)
   {
-    $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
-    $url = 'https://api.artifacia.com/v1/recommendation/collections/%d';
+    $url = 'https://api.artifacia.com/v1/recommendation/collections/%d/%d';
     $context = stream_context_create(array(
         'http' => array(
-            'header'  =>
-                          $credentials. "\r\n" .
-                          'Content-Type: application/json',
+          'header'  =>["api_key: " . $api_key,
+          "Content-Type: application/json"],
             'method' => 'GET'
         )
     ));
 
-    $url = sprintf($url, prod_id);
+    $url = sprintf($url, $prod_id, $num);
 
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
     return $result;
   }
 
-  public function get_visual_recommendation($prod_id)
+  public function get_visual_recommendation($prod_id, $num, $filters)
   {
-    $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
-    $url = 'https://api.artifacia.com/v1/recommendation/similar/%d';
+    $url = 'https://api.artifacia.com/v1/recommendation/similar/%d/%d?';
     $context = stream_context_create(array(
         'http' => array(
-            'header'  =>
-                          $credentials. "\r\n" .
-                          'Content-Type: application/json',
+          'header'  =>["api_key: " . $api_key,
+          "Content-Type: application/json"],
             'method' => 'GET'
         )
     ));
 
-    $url = sprintf($url, $prod_id);
-
+    $url = sprintf($url, $prod_id, $num);
+    foreach($filters as $key => $value){
+      $url = sprintf("%s%s%s%s%s", $url, $key, "=", $value, "&")
+    }
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
     return $result;
   }
 
-  public function get_smart_recommendation($user_id)
+  public function get_smart_recommendation($user_id, $num)
   {
-    $credentials = sprintf('Authorization: Basic %s', base64_encode("$this->user:$this->passwd") );
-    $url = 'https://api.artifacia.com/v1/recommendation/user/%d';
+    $url = 'https://api.artifacia.com/v1/recommendation/user/%d/%d';
     $context = stream_context_create(array(
         'http' => array(
-            'header'  =>
-                          $credentials. "\r\n" .
-                          'Content-Type: application/json',
+          'header'  =>["api_key: " . $api_key,
+          "Content-Type: application/json"],
             'method' => 'GET'
         )
     ));
 
-    $url = sprintf($url, user_id);
+    $url = sprintf($url, $user_id, $num);
 
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
