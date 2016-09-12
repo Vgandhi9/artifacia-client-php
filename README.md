@@ -22,7 +22,7 @@ The API is really easy and simple to use. First you need to visit [this](http://
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
-$ai_key = <api_key>;
+$api_key = <api_key>;
 use Artifacia\Client;
 $client = new Client($api_key);
 ```
