@@ -8,7 +8,7 @@ namespace Artifacia;
 
 class Client
 {
-  protected $api_key;
+  protected static $api_key;
 
   public function __construct($api_key)
   {
@@ -20,7 +20,7 @@ class Client
     $url = 'https://api.artifacia.com/v1/users/%d/purchased_items';
     $context = stream_context_create(array(
         'http' => array(
-          'header'  =>["api_key: " . $api_key,
+          'header'  =>["api_key: " . $this->api_key,
           "Content-Type: application/json"],
             'method' => 'POST',
             'content' => $data
@@ -39,7 +39,7 @@ class Client
     $url = 'https://api.artifacia.com/v1/users/%d/viewed_items';
     $context = stream_context_create(array(
         'http' => array(
-            'header'  =>["api_key: " . $api_key,
+            'header'  =>["api_key: " . $this->api_key,
             "Content-Type: application/json"],
             'method' => 'POST',
             'content' => $data
@@ -58,7 +58,7 @@ class Client
     $url = 'https://api.artifacia.com/v1/items';
     $context = stream_context_create(array(
         'http' => array(
-          'header'  =>["api_key: " . $api_key,
+          'header'  =>["api_key: " . $this->api_key,
           "Content-Type: application/json"],
             'method' => 'POST',
             'content' => $data
@@ -76,7 +76,7 @@ class Client
     $url = 'https://api.artifacia.com/v1/items';
     $context = stream_context_create(array(
         'http' => array(
-          'header'  =>["api_key: " . $api_key,
+          'header'  =>["api_key: " . $this->api_key,
           "Content-Type: application/json"],
             'method' => 'DELETE',
             'content' => $data
@@ -94,7 +94,7 @@ class Client
     $url = 'https://api.artifacia.com/v1/recommendation/collections/%d/%d';
     $context = stream_context_create(array(
         'http' => array(
-          'header'  =>["api_key: " . $api_key,
+          'header'  =>["api_key: " . $this->api_key,
           "Content-Type: application/json"],
             'method' => 'GET'
         )
@@ -112,7 +112,7 @@ class Client
     $url = 'https://api.artifacia.com/v1/recommendation/similar/%d/%d';
     $context = stream_context_create(array(
         'http' => array(
-          'header'  =>["api_key: " . $api_key,
+          'header'  =>["api_key: " . $this->api_key,
           "Content-Type: application/json"],
             'method' => 'POST',
             'content' => json_encode(array('filters' => $filters))
@@ -130,7 +130,7 @@ class Client
     $url = 'https://api.artifacia.com/v1/recommendation/user/%d/%d';
     $context = stream_context_create(array(
         'http' => array(
-          'header'  =>["api_key: " . $api_key,
+          'header'  =>["api_key: " . $this->api_key,
           "Content-Type: application/json"],
             'method' => 'GET'
         )
