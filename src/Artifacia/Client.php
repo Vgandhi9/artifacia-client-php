@@ -107,21 +107,19 @@ class Client
     return $result;
   }
 
-  public function get_visual_recommendation($prod_id, $num, $filters)
+  public function get_visual_recommendation($prod_id, $num, $filters='{}')
   {
-    $url = 'https://api.artifacia.com/v1/recommendation/similar/%d/%d?';
+    $url = 'https://api.artifacia.com/v1/recommendation/similar/%d/%d';
     $context = stream_context_create(array(
         'http' => array(
           'header'  =>["api_key: " . $api_key,
           "Content-Type: application/json"],
-            'method' => 'GET'
+            'method' => 'POST',
+            'content' => json_encode(array('filters' => $filters)
         )
     ));
 
     $url = sprintf($url, $prod_id, $num);
-    foreach($filters as $key => $value){
-      $url = sprintf("%s%s%s%s%s", $url, $key, "=", $value, "&")
-    }
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
     return $result;
