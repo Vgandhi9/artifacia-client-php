@@ -115,7 +115,7 @@ class Client
           'header'  =>["api_key: " . $api_key,
           "Content-Type: application/json"],
             'method' => 'POST',
-            'content' => json_encode(array('filters' => $filters)
+            'content' => json_encode(array('filters' => $filters))
         )
     ));
 
